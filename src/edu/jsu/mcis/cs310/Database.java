@@ -97,7 +97,7 @@ public class Database {
         
         // INSERT YOUR CODE HERE
         
-                try
+        try
         {
             String query;
             query = "DELETE FROM registration WHERE studentid = ? AND termid = ? AND crn = ?";
@@ -125,7 +125,24 @@ public class Database {
         int result = 0;
         
         // INSERT YOUR CODE HERE
+ 
+        try
+        {
+            String query;
+            query = "DELETE FROM registration WHERE studentid = ? AND termid = ?";
+            PreparedStatement pstSelect = connection.prepareStatement(query);
+            
+                    
+            pstSelect.setInt(1, studentid);
+            pstSelect.setInt(2, termid);
         
+      
+            result = pstSelect.executeUpdate();          
+            
+
+        }
+        catch (Exception e) { e.printStackTrace(); }
+
         
         return result;
         
