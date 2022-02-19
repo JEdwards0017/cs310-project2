@@ -49,8 +49,7 @@ public class Database {
             {
                 resultset = pstSelect.getResultSet();
                 
-                result = getResultSetAsJSON(resultset);
-                
+                result = getResultSetAsJSON(resultset);   
 
             }
 
@@ -153,6 +152,33 @@ public class Database {
         String result = null;
         
         // INSERT YOUR CODE HERE
+        
+        try
+        {
+            String query;
+            query = "SELECT * FROM registration JOIN section ON registration.crn = section.crn WHERE studentid = ? AND registration.termid = ?";
+            PreparedStatement pstSelect = connection.prepareStatement(query);
+            
+                    
+            pstSelect.setInt(1, studentid);
+            pstSelect.setInt(2, termid);
+        
+            boolean hasResults;
+            
+            ResultSet resultset = null;        
+            hasResults = pstSelect.execute();                
+                
+                
+            if(hasResults)
+            {
+                resultset = pstSelect.getResultSet();
+                
+                result = getResultSetAsJSON(resultset);
+                
+            }
+
+        }
+        catch (Exception e) { e.printStackTrace(); }
         
         
         return result;
