@@ -26,6 +26,39 @@ public class Database {
         
         // INSERT YOUR CODE HERE
         
+        String key, value;
+        
+        try
+        {
+            String query;
+            query = "SELECT * FROM section WHERE termid = ? AND subjectid = ? AND num = ?";
+            PreparedStatement pstSelect = connection.prepareStatement(query);
+            
+                    
+            pstSelect.setInt(1, termid);
+            pstSelect.setString(2, subjectid);
+            pstSelect.setString(3, num);
+        
+            boolean hasResults;
+            
+            ResultSet resultset = null;        
+            hasResults = pstSelect.execute();                
+                
+                
+            if(hasResults)
+            {
+                resultset = pstSelect.getResultSet();
+                
+                result = getResultSetAsJSON(resultset);
+                
+
+            }
+
+        }
+        catch (Exception e) { e.printStackTrace(); }
+        
+
+        
         return result;
         
     }
@@ -35,6 +68,7 @@ public class Database {
         int result = 0;
         
         // INSERT YOUR CODE HERE
+        
         
         return result;
         
@@ -46,6 +80,7 @@ public class Database {
         
         // INSERT YOUR CODE HERE
         
+        
         return result;
         
     }
@@ -56,6 +91,7 @@ public class Database {
         
         // INSERT YOUR CODE HERE
         
+        
         return result;
         
     }
@@ -65,6 +101,7 @@ public class Database {
         String result = null;
         
         // INSERT YOUR CODE HERE
+        
         
         return result;
         
@@ -130,7 +167,7 @@ public class Database {
         
             try {
 
-                String url = "jdbc:mysql://" + a + "/jsu_sp22_v1?autoReconnect=true&useSSL=false&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=America/Chicago";
+                String url = "jdbc:mysql://" + a + "/jsu_sp22_v1?autoReconnect=true&useSSL=false&zeroDateTimeBehavior=EXCEPTION&serverTimezone=America/Chicago";
                 // System.err.println("Connecting to " + url + " ...");
 
                 c = DriverManager.getConnection(url, u, p);
