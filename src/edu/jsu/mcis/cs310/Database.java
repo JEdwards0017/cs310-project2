@@ -31,6 +31,7 @@ public class Database {
         try
         {
             String query;
+            //query function to get data, took heavy ref from DatabaseTest.java
             query = "SELECT * FROM section WHERE termid = ? AND subjectid = ? AND num = ?";
             PreparedStatement pstSelect = connection.prepareStatement(query);
             
@@ -71,6 +72,7 @@ public class Database {
         try
         {
             String query;
+            //"register" query function which is just more of an add/insert
             query = "INSERT INTO registration (studentid, termid, crn) VALUES (?, ?, ?)";
             PreparedStatement pstSelect = connection.prepareStatement(query);
             
@@ -99,6 +101,7 @@ public class Database {
         try
         {
             String query;
+            //"drop" query function which is just a delete
             query = "DELETE FROM registration WHERE studentid = ? AND termid = ? AND crn = ?";
             PreparedStatement pstSelect = connection.prepareStatement(query);
             
@@ -128,6 +131,7 @@ public class Database {
         try
         {
             String query;
+            //"withdraw" query function which is just a delete not including crn
             query = "DELETE FROM registration WHERE studentid = ? AND termid = ?";
             PreparedStatement pstSelect = connection.prepareStatement(query);
             
@@ -156,6 +160,7 @@ public class Database {
         try
         {
             String query;
+            //joins all other methods together to function
             query = "SELECT * FROM registration JOIN section ON registration.crn = section.crn WHERE studentid = ? AND registration.termid = ?";
             PreparedStatement pstSelect = connection.prepareStatement(query);
             
